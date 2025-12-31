@@ -3,6 +3,7 @@ import { ChatSidebar } from '@/components/chat/ChatSidebar';
 import { ChatHeader } from '@/components/chat/ChatHeader';
 import { ChatArea } from '@/components/chat/ChatArea';
 import { InputComposer } from '@/components/chat/InputComposer';
+import { CursorGlow } from '@/components/CursorGlow';
 import { useChat } from '@/hooks/useChat';
 
 const Index = () => {
@@ -29,6 +30,9 @@ const Index = () => {
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gradient-page bg-noise">
+      {/* Cursor glow effect */}
+      <CursorGlow />
+
       {/* Sidebar */}
       <ChatSidebar
         isOpen={sidebarOpen}
