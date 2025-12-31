@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Menu, Bot, Settings } from 'lucide-react';
+import { Menu, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface ChatHeaderProps {
   onMenuClick: () => void;
@@ -40,16 +41,7 @@ export function ChatHeader({ onMenuClick, documentCount }: ChatHeaderProps) {
         </div>
       </div>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-9 w-9">
-            <Settings className="h-5 w-5 text-muted-foreground" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Settings</p>
-        </TooltipContent>
-      </Tooltip>
+      <ThemeToggle />
     </motion.header>
   );
 }
