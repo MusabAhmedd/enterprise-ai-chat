@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 99%;
     --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
@@ -52,52 +52,62 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 238 76% 57%;
+
+    /* Gradient backgrounds */
+    --gradient-bg-from: 240 20% 98%;
+    --gradient-bg-via: 220 20% 97%;
+    --gradient-bg-to: 250 20% 98%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 95%;
 
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 5% 14%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 5% 55%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 240 5% 14%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    --border: 240 5% 16%;
+    --input: 240 5% 16%;
     --ring: 240 4.9% 83.9%;
 
-    --chat-user: 238 76% 57%;
+    --chat-user: 238 76% 60%;
     --chat-user-foreground: 0 0% 100%;
-    --chat-ai: 240 3.7% 15.9%;
-    --chat-ai-foreground: 0 0% 98%;
-    --dropzone: 238 76% 57%;
-    --dropzone-muted: 240 3.7% 20%;
+    --chat-ai: 240 5% 12%;
+    --chat-ai-foreground: 0 0% 95%;
+    --dropzone: 238 76% 60%;
+    --dropzone-muted: 240 5% 20%;
 
     --sidebar-background: 240 10% 5%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 238 76% 57%;
+    --sidebar-foreground: 240 4.8% 80%;
+    --sidebar-primary: 238 76% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 238 76% 57%;
+    --sidebar-accent: 240 5% 12%;
+    --sidebar-accent-foreground: 240 4.8% 90%;
+    --sidebar-border: 240 5% 14%;
+    --sidebar-ring: 238 76% 60%;
+
+    /* Gradient backgrounds */
+    --gradient-bg-from: 240 10% 4%;
+    --gradient-bg-via: 250 12% 6%;
+    --gradient-bg-to: 230 10% 5%;
   }
 }
 
@@ -115,6 +125,47 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .bg-gradient-page {
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--dropzone) / 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, hsl(var(--dropzone) / 0.05), transparent),
+      linear-gradient(
+        135deg,
+        hsl(var(--gradient-bg-from)),
+        hsl(var(--gradient-bg-via)),
+        hsl(var(--gradient-bg-to))
+      );
+  }
+
+  .bg-gradient-sidebar {
+    background: 
+      linear-gradient(
+        180deg,
+        hsl(var(--sidebar-background)),
+        hsl(var(--sidebar-background) / 0.95)
+      );
+  }
+
+  .bg-noise {
+    position: relative;
+  }
+
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dark .bg-noise::before {
+    opacity: 0.03;
   }
 }
 
@@ -187,7 +238,7 @@
 }
 
 .prose-chat a {
-  @apply text-primary underline underline-offset-2;
+  @apply text-dropzone underline underline-offset-2;
 }
 
 .prose-chat blockquote {
@@ -202,4 +253,9 @@
 
 .cursor-blink {
   animation: blink 1s step-end infinite;
+}
+
+/* Smooth theme transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

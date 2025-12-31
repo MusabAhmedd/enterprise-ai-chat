@@ -42,12 +42,11 @@ export function ChatSidebar({
         )}
       </AnimatePresence>
 
-      {/* Sidebar */}
       <motion.aside
         initial={{ x: -320 }}
         animate={{ x: isOpen ? 0 : -320 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="fixed left-0 top-0 z-50 h-full w-72 border-r border-border bg-sidebar/95 backdrop-blur-xl lg:static lg:translate-x-0"
+        className="fixed left-0 top-0 z-50 h-full w-72 border-r border-border bg-gradient-sidebar backdrop-blur-xl lg:static lg:translate-x-0"
       >
         <div className="flex h-full flex-col">
           {/* Header */}
